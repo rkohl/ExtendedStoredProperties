@@ -24,6 +24,7 @@ DerivedData/
 
 ## Obj-C/Swift specific
 *.hmap
+.swiftpm/xcode/xcuserdata/ryankohl.xcuserdatad/xcschemes/xcschememanagement.plist
 
 ## App packaging
 *.ipa
@@ -47,6 +48,8 @@ playground.xcworkspace
 # hence it is not needed unless you have added a package configuration file to your project
  .swiftpm
   .swiftpm/*
+  *.swiftpm/*
  .swiftpm/xcode/package.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+  .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .build/
 
