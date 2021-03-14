@@ -1,5 +1,5 @@
 //
-//  ExtendedPropertiesObjectKey.swift
+//  ExtendedStoredPropertyKey.swift
 //  
 //
 //  Created by Thomas on 09/07/2020.
@@ -8,7 +8,7 @@
 import Foundation
 
 @propertyWrapper
-internal struct ExtendedPropertiesObjectKey<Wrapped: AnyObject> {
+internal struct ExtendedStoredPropertyKey<Wrapped: AnyObject> {
     private weak var object: AnyObject?
     private var value: Wrapped? {
         get { object as? Wrapped }
@@ -27,9 +27,9 @@ internal struct ExtendedPropertiesObjectKey<Wrapped: AnyObject> {
     }
 }
 
-extension ExtendedPropertiesObjectKey: Hashable {
-    public static func == (lhs: ExtendedPropertiesObjectKey<Wrapped>,
-                           rhs: ExtendedPropertiesObjectKey<Wrapped>) -> Bool {
+extension ExtendedStoredPropertyKey: Hashable {
+    public static func == (lhs: ExtendedStoredPropertyKey<Wrapped>,
+                           rhs: ExtendedStoredPropertyKey<Wrapped>) -> Bool {
         lhs.hashValue == rhs.hashValue
     }
     

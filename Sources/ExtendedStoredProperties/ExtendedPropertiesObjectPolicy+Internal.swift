@@ -1,5 +1,5 @@
 //
-//  ExtendedPropertiesObjectPolicy+Internal.swift
+//  ExtendedStoredPropertyPolicy+Internal.swift
 //  
 //
 //  Created by Thomas on 11/07/2020.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal enum ExtendedPropertiesObjectPolicy {
+internal enum ExtendedStoredPropertyPolicy {
 
     /// Specifies a weak reference to the associated object.
     case assign
@@ -36,21 +36,21 @@ internal enum ExtendedPropertiesObjectPolicy {
 }
 
 internal protocol RealPolicy {
-    var rPolicy: ExtendedPropertiesObjectPolicy { get }
+    var rPolicy: ExtendedStoredPropertyPolicy { get }
 }
 
-extension ExtendedPropertiesObjectReferencePolicy: RealPolicy {
-    internal var rPolicy: ExtendedPropertiesObjectPolicy { .assign }
+extension ExtendedStoredPropertyReferencePolicy: RealPolicy {
+    internal var rPolicy: ExtendedStoredPropertyPolicy { .assign }
 }
 
-extension ExtendedPropertiesObjectValuePolicy: RealPolicy {
-    internal var rPolicy: ExtendedPropertiesObjectPolicy {
+extension ExtendedStoredPropertyValuePolicy: RealPolicy {
+    internal var rPolicy: ExtendedStoredPropertyPolicy {
         self == .atomic ? .atomic : .non_atomic
     }
 }
 
-extension ExtendedPropertiesObjectCopyValuePolicy: RealPolicy {
-    internal var rPolicy: ExtendedPropertiesObjectPolicy {
+extension ExtendedStoredPropertyCopyValuePolicy: RealPolicy {
+    internal var rPolicy: ExtendedStoredPropertyPolicy {
         self == .copy_atomic ? .copy_atomic : .copy_non_atomic
     }
 }

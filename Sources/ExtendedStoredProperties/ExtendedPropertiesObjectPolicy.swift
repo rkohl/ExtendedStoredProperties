@@ -1,5 +1,5 @@
 //
-//  ExtendedPropertiesObjectPolicy.swift
+//  ExtendedStoredPropertyPolicy.swift
 //  
 //
 //  Created by Thomas on 11/07/2020.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-public enum ExtendedPropertiesObjectReferencePolicy {
+public enum ExtendedStoredPropertyReferencePolicy {
 
     /// Specifies a weak reference to the associated object.
     /// Require the associated object to be an optional reference type.
     case assign
 }
 
-public enum ExtendedPropertiesObjectValuePolicy {
+public enum ExtendedStoredPropertyValuePolicy {
 
     /// Specifies that the association is made atomically.
     /// On a reference type the associated object will be a strong reference.
@@ -27,7 +27,7 @@ public enum ExtendedPropertiesObjectValuePolicy {
     case non_atomic
 }
 
-public enum ExtendedPropertiesObjectCopyValuePolicy {
+public enum ExtendedStoredPropertyCopyValuePolicy {
 
     /// Specifies that the associated object is copied.
     /// And that the association is made atomically.

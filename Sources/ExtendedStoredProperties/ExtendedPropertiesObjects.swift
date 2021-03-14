@@ -1,5 +1,5 @@
 //
-//  ExtendedPropertiesObjects.swift
+//  ExtendedStoredProperties.swift
 //
 //
 //  Created by Thomas on 09/07/2020.
@@ -8,7 +8,7 @@
 import Foundation
 
 @propertyWrapper
-private struct WeakExtendedPropertiesObject<Wrapped> {
+private struct WeakExtendedStoredProperty<Wrapped> {
     private weak var storage: AnyObject?
     private var value: Wrapped? {
         get { storage as? Wrapped }
@@ -31,11 +31,11 @@ private struct WeakExtendedPropertiesObject<Wrapped> {
     }
 }
 
-internal struct ExtendedPropertiesObjects {
-    static private let queueName = "SynchronizedExtendedPropertiesObjectsAccess"
+internal struct ExtendedStoredProperties {
+    static private let queueName = "SynchronizedExtendedStoredPropertiesAccess"
     static private let accessQueue = DispatchQueue(label: queueName,
                                                    attributes: .concurrent)
-    static private var property = [ExtendedPropertiesObjectKey<AnyObject>: Any?]()
+    static private var property = [ExtendedStoredPropertyKey<AnyObject>: Any?]()
     
     internal static func remove() {
         if property.count == 0 { return }
@@ -45,13 +45,13 @@ internal struct ExtendedPropertiesObjects {
         }
     }
     
-    internal static func get<T>(_ key: ExtendedPropertiesObjectKey<AnyObject>,
-                                policy: ExtendedPropertiesObjectPolicy) -> T? {
+    internal static func get<T>(_ key: ExtendedStoredPropertyKey<AnyObject>,
+                                policy: ExtendedStoredPropertyPolicy) -> T? {
         Self.remove()
         var res: T?
         accessQueue.sync {
             if policy == .assign {
-                let weakObject = property[key] as? WeakExtendedPropertiesObject<Any>
+                let weakObject = property[key] as? WeakExtendedStoredProperty<Any>
                 res = weakObject?.wrappedValue as? T
             }
             else {
@@ -61,8 +61,8 @@ internal struct ExtendedPropertiesObjects {
         return res
     }
 
-    internal static func haveKey(_ key: ExtendedPropertiesObjectKey<AnyObject>,
-                                 policy: ExtendedPropertiesObjectPolicy) -> Bool {
+    internal static func haveKey(_ key: ExtendedStoredPropertyKey<AnyObject>,
+                                 policy: ExtendedStoredPropertyPolicy) -> Bool {
         var res = false
         accessQueue.sync {
             res = property.contains(where: { $0.key == key })
@@ -71,16 +71,16 @@ internal struct ExtendedPropertiesObjects {
 
     }
     
-    internal static func set(_ key: ExtendedPropertiesObjectKey<AnyObject>,
+    internal static func set(_ key: ExtendedStoredPropertyKey<AnyObject>,
                              value: Any,
-                             policy: ExtendedPropertiesObjectPolicy) {
+                             policy: ExtendedStoredPropertyPolicy) {
         Self.remove()
         let flag: DispatchWorkItemFlags = policy.isAtomic ? .barrier : .detached
         
         accessQueue.async(flags: flag) {
             var toStore = value
             if policy == .assign {
-                toStore = WeakExtendedPropertiesObject(value)
+                toStore = WeakExtendedStoredProperty(value)
             } else if policy.isCopy {
                 toStore = (value as! NSCopying).copy()
             }

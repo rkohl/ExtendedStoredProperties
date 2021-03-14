@@ -1,5 +1,5 @@
 //
-//  ExtendedPropertiesObject.swift
+//  ExtendedStoredProperty.swift
 //  
 //
 //  Created by Thomas on 09/07/2020.
@@ -7,35 +7,35 @@
 
 import Foundation
 
-public protocol ExtendedPropertiesObjectOptionalType: ExpressibleByNilLiteral {
+public protocol ExtendedStoredPropertyOptionalType: ExpressibleByNilLiteral {
     associatedtype WrappedType
     var asOptional: WrappedType? { get }
 }
 
-extension Optional: ExtendedPropertiesObjectOptionalType {
+extension Optional: ExtendedStoredPropertyOptionalType {
     public var asOptional: Wrapped? {
         return self
     }
 }
 
 @propertyWrapper
-public class ExtendedPropertiesObject<T: Any> {
+public class ExtendedStoredProperty<T: Any> {
 
-    internal let key: ExtendedPropertiesObjectKey<AnyObject>
-    internal var policy: ExtendedPropertiesObjectPolicy
+    internal let key: ExtendedStoredPropertyKey<AnyObject>
+    internal var policy: ExtendedStoredPropertyPolicy
 
     public typealias ObjectType = T
-    public typealias CopyPolicy = ExtendedPropertiesObjectCopyValuePolicy
-    public typealias ValuePolicy = ExtendedPropertiesObjectValuePolicy
-    public typealias ReferencePolicy = ExtendedPropertiesObjectReferencePolicy
-    public typealias OptionalType = ExtendedPropertiesObjectOptionalType
+    public typealias CopyPolicy = ExtendedStoredPropertyCopyValuePolicy
+    public typealias ValuePolicy = ExtendedStoredPropertyValuePolicy
+    public typealias ReferencePolicy = ExtendedStoredPropertyReferencePolicy
+    public typealias OptionalType = ExtendedStoredPropertyOptionalType
 
 
     public var wrappedValue: ObjectType! {
         get {
-            ExtendedPropertiesObjects.get(key, policy: policy) }
+            ExtendedStoredProperties.get(key, policy: policy) }
         set {
-            ExtendedPropertiesObjects.set(key, value: newValue as Any,
+            ExtendedStoredProperties.set(key, value: newValue as Any,
                                   policy: policy)
         }
     }
@@ -43,11 +43,11 @@ public class ExtendedPropertiesObject<T: Any> {
     internal required init<M: Hashable>(_ object: AnyObject,
                                         key: M,
                                         initValue: T,
-                                        policy: ExtendedPropertiesObjectPolicy,
+                                        policy: ExtendedStoredPropertyPolicy,
                                         internal: Bool) {
-        self.key = ExtendedPropertiesObjectKey(object, key: key)
+        self.key = ExtendedStoredPropertyKey(object, key: key)
         self.policy = policy
-        if !ExtendedPropertiesObjects.haveKey(self.key, policy: self.policy) {
+        if !ExtendedStoredProperties.haveKey(self.key, policy: self.policy) {
             self.wrappedValue = initValue
         }
     }
