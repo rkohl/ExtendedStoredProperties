@@ -19,6 +19,7 @@ Extended Stored Properties is a pure swift implementation of Associated Object b
 - [Extended Stored Property Policy](#associated-object-policy)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Credit](#credit)
 
 ## Features
 
@@ -128,10 +129,6 @@ set { copiedOptionalAssociated(newValue) }
 }
 ```
 
-#### ExtendedStoredProperty Policy
-
-
-
 ## Requirements
 
 | iOS | watchOS | tvOS | macOS | Mac Catalyst |
@@ -160,3 +157,32 @@ If you are using Xcode 11 or later:
 ```swift
 https://github.com/rkohl/ExtendedStoredProperties.git
 ```
+
+## Credit and Contributions
+
+[Original project](https://github.com/inso-/SwiftAssociatedObject) developed by [Thomas Moussajee](https://github.com/inso-)
+
+
+## License
+
+MIT License
+
+Copyright (c) 2020 Thomas Moussajee
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
