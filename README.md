@@ -39,15 +39,15 @@ Extended Stored Properties is a pure swift implementation of Associated Object b
 
 ```swift
 
-import SwiftAssociatedObject
+import ExtendedStoredProperty
 
 protocol MyProtocol {
 var myStoredVar: Bool { get set }
 }
 
 extension NSObject: MyProtocol {
-private var myStoredVarAssociated: AssociatedObject<Bool> {
-AssociatedObject(self, key: "myStoredVar", initValue: false)
+private var myStoredVarAssociated: ExtendedStoredProperty<Bool> {
+ExtendedStoredProperty(self, key: "myStoredVar", initValue: false)
 }
 
 public var myStoredVar: Bool {
@@ -95,7 +95,7 @@ case copy_non_atomic
 
 ```swift
 
-import SwiftAssociatedObject
+import ExtendedStoredProperty
 
 private var testClassGlobal = NSNumber(value: 42)
 
@@ -106,12 +106,12 @@ var copiedOptionalValue: NSNumber? { get set }
 
 extension NSObject: Valuable {
 
-private var weakValueAssociated: AssociatedObject<NSNumber?> {
-AssociatedObject(self, key: "weakValue", initValue: Optional(testClassGlobal), policy: .assign)
+private var weakValueAssociated: ExtendedStoredProperty<NSNumber?> {
+ExtendedStoredProperty(self, key: "weakValue", initValue: Optional(testClassGlobal), policy: .assign)
 }
 
-private var copiedOptionalAssociated: AssociatedObject<NSNumber?> {
-AssociatedObject(self, key: "copiedOptionalValue",
+private var copiedOptionalAssociated: ExtendedStoredProperty<NSNumber?> {
+ExtendedStoredProperty(self, key: "copiedOptionalValue",
 initValue: Optional(testClassGlobal),
 policy: .copy_atomic)
 }
@@ -149,7 +149,7 @@ import ExtendedStoredProperties
 
 ### Swift Package Manager
 
-The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into Xcode and the Swift compiler. **This is the recommended installation method.** Updates to SwiftAssociatedObject will always be available immediately to projects with SPM. SPM is also integrated directly with Xcode.
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into Xcode and the Swift compiler. **This is the recommended installation method.** Updates to ExtendedStoredProperty will always be available immediately to projects with SPM. SPM is also integrated directly with Xcode.
 
 If you are using Xcode 11 or later:
 1. Click `File`
