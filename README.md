@@ -92,7 +92,7 @@ case copy_non_atomic
 
 ```
 
-#### ExtendedStoredPropertyPolicy Exemple
+#### ExtendedStoredPropertyPolicy Example
 
 ```swift
 
